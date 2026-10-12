@@ -1,0 +1,447 @@
+/* ===== Contenedor general ===== */
+.ws-root {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 0 48px;
+  box-sizing: border-box;
+}
+
+.ws-root h3 {
+  margin: 28px 0 10px;
+  font-size: 1.05em;
+}
+
+.ws-profile-section,
+.ws-stats-section {
+  padding: 0 32px;
+}
+
+.ws-hidden-input {
+  display: none;
+}
+
+/* Imagen que cubre su contenedor (recortada al centro) */
+.ws-cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ===== Portada (3:1) ===== */
+.ws-banner {
+  position: relative;
+  aspect-ratio: 3 / 1;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--interactive-accent),
+    color-mix(in srgb, var(--interactive-accent) 35%, var(--background-primary))
+  );
+}
+
+.ws-banner-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.ws-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 0.8em;
+  border-radius: var(--radius-m);
+  border: none;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--background-primary) 75%, transparent);
+  color: var(--text-normal);
+  backdrop-filter: blur(6px);
+}
+
+.ws-action-icon {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+}
+
+.ws-action-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Cabecera de perfil ===== */
+.ws-profile-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0 4px;
+}
+
+/* El avatar sobresale sobre la portada; el nombre queda debajo de la portada */
+.ws-avatar {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  margin-top: -48px;
+  border-radius: 50%;
+  border: 4px solid var(--background-primary);
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  cursor: pointer;
+}
+
+.ws-avatar-clip {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.ws-avatar-badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-secondary);
+  border: 2px solid var(--background-primary);
+  color: var(--text-muted);
+}
+
+.ws-avatar-badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ws-profile-info {
+  flex: 1;
+  min-width: 0;
+  margin-top: 14px;
+}
+
+.ws-name-input {
+  width: 100%;
+  font-size: 1.5em;
+  font-weight: 700;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed transparent;
+  box-shadow: none;
+  color: var(--text-normal);
+  padding: 2px 0;
+  outline: none;
+}
+
+.ws-name-input:hover,
+.ws-name-input:focus {
+  border-bottom-color: var(--background-modifier-border-hover);
+}
+
+.ws-profile-sub {
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+/* ===== Tarjetas ===== */
+.ws-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.ws-card {
+  background: var(--background-secondary);
+  border-radius: var(--radius-m);
+  padding: 12px 14px;
+  min-width: 0;
+}
+
+.ws-card-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.4em;
+  font-weight: 600;
+  color: var(--text-accent);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.ws-card-label {
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
+
+.ws-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+}
+
+.ws-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ws-icon-flame {
+  color: var(--color-orange);
+}
+
+.ws-icon-off {
+  color: var(--text-faint);
+}
+
+/* ===== Mapa de calor ===== */
+.ws-heat-wrap {
+  overflow-x: auto;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ws-heat {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Días de la semana: alineados con las filas de cuadrados */
+.ws-heat-days {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: repeat(7, 11px);
+  row-gap: 3px;
+  padding-top: 18px;
+  padding-right: 8px;
+  background: var(--background-primary);
+  font-size: 0.7em;
+  line-height: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.ws-heat-main {
+  position: relative;
+}
+
+/* Meses: encima de las columnas de semana */
+.ws-heat-months {
+  position: relative;
+  height: 18px;
+}
+
+.ws-heat-months span {
+  position: absolute;
+  top: 0;
+  font-size: 0.75em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+.ws-heatmap {
+  display: grid;
+  grid-template-rows: repeat(7, 11px);
+  grid-auto-flow: column;
+  grid-auto-columns: 11px;
+  gap: 3px;
+  width: max-content;
+}
+
+.ws-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: var(--background-modifier-border);
+}
+
+.ws-cell[data-level="1"] {
+  background: color-mix(in srgb, var(--interactive-accent) 25%, var(--background-modifier-border));
+}
+.ws-cell[data-level="2"] {
+  background: color-mix(in srgb, var(--interactive-accent) 50%, var(--background-modifier-border));
+}
+.ws-cell[data-level="3"] {
+  background: color-mix(in srgb, var(--interactive-accent) 75%, var(--background-modifier-border));
+}
+.ws-cell[data-level="4"] {
+  background: var(--interactive-accent);
+}
+
+.ws-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
+
+/* ===== Top 10 notas ===== */
+.ws-top {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ws-top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+  cursor: pointer;
+  min-width: 0;
+}
+
+.ws-top-row:hover {
+  background: var(--background-modifier-hover);
+}
+
+.ws-top-rank {
+  width: 24px;
+  flex-shrink: 0;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.ws-top-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ws-top-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ws-top-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  min-width: 0;
+}
+
+.ws-top-time {
+  color: var(--text-accent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-size: 0.9em;
+}
+
+.ws-top-bar {
+  height: 6px;
+  margin: 6px 0 4px;
+  border-radius: 3px;
+  background: var(--background-modifier-border);
+  overflow: hidden;
+}
+
+.ws-top-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--interactive-accent);
+}
+
+.ws-top-meta {
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
+
+.ws-empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ===== Móviles y pantallas estrechas ===== */
+@media (max-width: 600px) {
+  .ws-root {
+    max-width: none;
+    padding-bottom: 32px;
+  }
+
+  .ws-profile-section,
+  .ws-stats-section {
+    padding: 0 14px;
+  }
+
+  .ws-banner {
+    border-radius: var(--radius-m);
+  }
+
+  .ws-banner-actions {
+    top: 8px;
+    right: 8px;
+  }
+
+  .ws-profile-header {
+    gap: 12px;
+  }
+
+  .ws-avatar {
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+  }
+
+  .ws-avatar-clip {
+    font-size: 1.7em;
+  }
+
+  .ws-profile-info {
+    margin-top: 12px;
+  }
+
+  .ws-name-input {
+    font-size: 1.25em;
+  }
+
+  .ws-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .ws-card {
+    padding: 10px 12px;
+  }
+
+  .ws-card-value {
+    font-size: 1.2em;
+  }
+
+  .ws-top-row {
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .ws-top-rank {
+    width: 18px;
+  }
+}
